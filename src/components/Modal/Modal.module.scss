@@ -1,0 +1,38 @@
+.modal {
+  display: none;
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.content {
+  padding: 20px;
+  border-radius: 15px;
+  background-color: white;
+  max-width: 80%;
+  position: relative;
+  color: #363636;
+  width: 600px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #363636;
+
+  &:hover {
+    color: black;
+  }
+}
