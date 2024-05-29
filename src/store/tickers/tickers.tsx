@@ -19,7 +19,14 @@ class Tickers {
       const res = await getData()
 
       runInAction(() => {
-        this.tickersData = res.data
+        this.tickersData = res.data.map((item) => ({
+          symbol: item.symbol,
+          price: item.price,
+          bestAskSize: item.bestAskSize,
+          bestAskPrice: item.bestAskPrice,
+          bestBidPrice: item.bestBidPrice,
+        }))
+
         const half = Math.ceil(res.data.length / 2)
 
         this.activeTab === 0
