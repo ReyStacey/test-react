@@ -1,1 +1,3 @@
-export { Quotes } from './Quotes'
+import { lazy } from 'react'
+
+export const Quotes = lazy(() => import('./Quotes'))

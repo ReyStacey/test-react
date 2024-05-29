@@ -15,7 +15,7 @@ const COLUMN_NAMES = [
   'bestBidPrice',
 ]
 
-export const Quotes = observer(() => {
+const Quotes = observer(() => {
   const { isOpen } = modalStore
 
   const { id } = useParams<{ id: string }>()
@@ -68,3 +68,5 @@ export const Quotes = observer(() => {
     </div>
   )
 })
+
+export default Quotes
