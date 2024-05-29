@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import styles from './Layout.module.scss'
+import { Loader } from '../Loader'
 
 export const Layout = () => {
   return (
@@ -10,9 +11,11 @@ export const Layout = () => {
         <NavLink to="/quotes/0"> Quotes A </NavLink>
         <NavLink to="/quotes/1"> Quotes B </NavLink>
       </header>
-      <main className={styles.container}>
-        <Outlet />
-      </main>
+      <Suspense fallback={<Loader />}>
+        <main className={styles.container}>
+          <Outlet />
+        </main>
+      </Suspense>
     </>
   )
 }
