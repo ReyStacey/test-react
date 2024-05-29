@@ -51,6 +51,8 @@
         font-size: 14px;
         vertical-align: top;
         width: 200px;
+        min-width: 100px;
+        transition: color 0.7s ease-in-out;
 
         &:first-child {
           border-radius: 8px 0 0 8px;

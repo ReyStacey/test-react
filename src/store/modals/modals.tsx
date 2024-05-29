@@ -1,18 +1,18 @@
 import { makeAutoObservable } from 'mobx'
 
 class Modal {
-  data: any = {}
-  isOpen: boolean = false
+  public data: any = {}
+  public isOpen: boolean = false
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  setModalState = (value: boolean) => {
+  public setModalState = (value: boolean) => {
     this.isOpen = value
   }
 
-  setModalData = (value: any) => {
+  public setModalData = (value: any) => {
     this.data = value
   }
 }

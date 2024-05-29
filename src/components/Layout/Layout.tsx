@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import styles from './Layout.module.scss'
 import { Loader } from '../Loader'

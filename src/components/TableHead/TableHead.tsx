@@ -1,7 +1,9 @@
 import React from 'react'
+
 interface ITableHead {
   names: string[]
 }
+
 export const TableHead = ({ names }: ITableHead) => {
   return (
     <thead>

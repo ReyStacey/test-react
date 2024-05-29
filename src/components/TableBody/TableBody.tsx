@@ -11,7 +11,7 @@ export const TableBody = observer(({ data }: ITableBody) => {
   return (
     <tbody>
       {data.map((item) => (
-        <TableRow key={item.symbol} item={item} />
+        <TableRow key={item.symbol} item={item} name={item.symbol} />
       ))}
     </tbody>
   )

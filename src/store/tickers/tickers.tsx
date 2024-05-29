@@ -2,20 +2,20 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import { ITickerData, getData } from '../../api/ticker/getData'
 
 class Tickers {
-  tickersData: ITickerData[] = []
-  tickersDataOne: ITickerData[] = []
-  tickersDataTwo: ITickerData[] = []
-  isLoading: boolean = false
-  error: string | null = null
-  activeTab: number = 0
+  private tickersData: ITickerData[] = []
+  private tickersDataOne: ITickerData[] = []
+  private tickersDataTwo: ITickerData[] = []
+  public isLoading: boolean = false
+  public error: string | null = null
+  public activeTab: number = 0
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  getTickets = async () => {
+  public getTickets = async () => {
+    this.isLoading = true
     try {
-      this.isLoading = true
       const res = await getData()
 
       runInAction(() => {
@@ -46,8 +46,15 @@ class Tickers {
     }
   }
 
-  setActiveTab = (tabIndex: number) => {
+  public setActiveTab = (tabIndex: number) => {
     this.activeTab = tabIndex
+  }
+
+  get allTickers() {
+    return {
+      0: this.tickersDataOne,
+      1: this.tickersDataTwo,
+    }
   }
 }
 
