@@ -1,13 +1,13 @@
 .notification {
   display: block;
   padding: 10px 30px;
-  background-color: rgba(253, 51, 51, 0.9);
+  background-color: var(--main-danger-color);
   border-radius: 8px;
   position: absolute;
   top: 113px;
   transform: translate(-50%, 0);
   left: 50%;
-  color: white;
+  color: var(--main-light-color);
   font-weight: bold;
   pointer-events: none;
 

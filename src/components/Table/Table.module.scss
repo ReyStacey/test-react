@@ -1,11 +1,11 @@
 .table {
-  color: #363636;
+  color: var(--main-dark-color);
   margin: 0 auto;
 
   & thead {
     & th {
       font-weight: bold;
-      background: #acbb97;
+      background: var(--main-color);
     }
 
     & tr {
@@ -13,7 +13,7 @@
 
       &:nth-child(even) {
         &:hover {
-          background: #acbb9769;
+          background: var(--main-hover-color);
         }
       }
 
@@ -41,7 +41,7 @@
       cursor: pointer;
 
       &:nth-child(even) {
-        background: #4a4a4a25;
+        background: var(--main-grey-color);
       }
 
       & td {
@@ -62,7 +62,7 @@
       }
 
       &:hover {
-        background: #acbb9769;
+        background: var(--main-hover-color);
       }
     }
   }

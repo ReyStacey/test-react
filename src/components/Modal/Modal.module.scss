@@ -17,10 +17,10 @@
 .content {
   padding: 20px;
   border-radius: 15px;
-  background-color: white;
+  background-color: var(--main-light-color);
   max-width: 80%;
   position: relative;
-  color: #363636;
+  color: var(--main-dark-color);
   width: 600px;
 }
 
@@ -30,9 +30,9 @@
   right: 20px;
   font-size: 24px;
   cursor: pointer;
-  color: #363636;
+  color: var(--main-dark-color);
 
   &:hover {
-    color: black;
+    color: var(--main-black-color);
   }
 }
