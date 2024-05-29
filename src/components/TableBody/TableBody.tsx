@@ -9,12 +9,10 @@ interface ITableBody {
 
 export const TableBody = observer(({ data }: ITableBody) => {
   return (
-    <>
-      <tbody>
-        {data.map((item, index) => (
-          <TableRow key={index} item={item} />
-        ))}
-      </tbody>
-    </>
+    <tbody>
+      {data.map((item) => (
+        <TableRow key={item.symbol} item={item} />
+      ))}
+    </tbody>
   )
 })

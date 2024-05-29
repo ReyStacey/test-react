@@ -2,6 +2,7 @@ import React from 'react'
 import { ITickerData } from '../../api/ticker'
 import { observer } from 'mobx-react-lite'
 import { modalStore } from '../../store/modals'
+import { TableCell } from '../TableCell'
 
 interface ITicket {
   item: ITickerData
@@ -27,7 +28,7 @@ export const TableRow = observer((props: ITicket) => {
   return (
     <tr onClick={handleClick}>
       {cells.map((cell, index) => (
-        <td key={index}>{cell}</td>
+        <TableCell key={index} cell={cell} />
       ))}
     </tr>
   )
