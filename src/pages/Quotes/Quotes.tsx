@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { tickersStore } from '../../store/tickers'
 import { observer } from 'mobx-react-lite'
 import { Table } from '../../components/Table'
-import { Tabs } from '../../components/Tabs'
 import { ITickerData } from '../../api/ticker'
+import { modalStore } from '../../store/modals'
+import { useParams } from 'react-router-dom'
+import { NotFound } from '../NotFound'
 
 const COLUMN_NAMES = [
   'symbol',
@@ -15,6 +16,11 @@ const COLUMN_NAMES = [
 ]
 
 export const Quotes = observer(() => {
+  const { isOpen } = modalStore
+
+  const { id } = useParams<{ id: string }>()
+  const validId = id !== undefined ? parseInt(id, 10) : 0
+
   const {
     getTickets,
     tickersDataOne,
@@ -24,48 +30,41 @@ export const Quotes = observer(() => {
     setActiveTab,
   } = tickersStore
 
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const initialTab = parseInt(searchParams.get('tab') || '0', 10)
-  const [selectedActiveTab, setSelectedActiveTab] = useState(initialTab)
-
-  const activeData: ITickerData[] =
-    selectedActiveTab === 0 ? tickersDataOne : tickersDataTwo
+  const allTickers: { [key: number]: ITickerData[] } = {
+    0: tickersDataOne,
+    1: tickersDataTwo,
+  }
 
   useEffect(() => {
     getTickets()
 
-    const interval = setInterval(() => {
-      getTickets()
-    }, 5000)
+    if (!isOpen) {
+      const interval = setInterval(() => {
+        getTickets()
+      }, 5000)
 
-    return () => clearInterval(interval)
-  }, [getTickets])
+      return () => clearInterval(interval)
+    }
+  }, [isOpen, getTickets])
 
   useEffect(() => {
-    setActiveTab(selectedActiveTab)
-  }, [selectedActiveTab, setActiveTab])
+    setActiveTab(validId)
+  }, [validId, setActiveTab])
+
+  if (!(validId in allTickers)) {
+    return <NotFound />
+  }
 
   return (
     <div>
-      <Tabs setSelectedActiveTab={setSelectedActiveTab}>
-        <Table
-          data={activeData}
-          error={error}
-          names={COLUMN_NAMES}
-          isLoading={isLoading}
-          label="Quotes A"
-          id={0}
-        />
-        <Table
-          data={activeData}
-          error={error}
-          names={COLUMN_NAMES}
-          isLoading={isLoading}
-          label="Quotes B"
-          id={1}
-        />
-      </Tabs>
+      <Table
+        data={allTickers[validId]}
+        error={error}
+        names={COLUMN_NAMES}
+        isLoading={isLoading}
+        label={`Quotes ${validId === 0 ? 'A' : 'B'}`}
+        id={validId}
+      />
     </div>
   )
 })

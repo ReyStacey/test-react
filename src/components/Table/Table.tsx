@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ITickerData } from '../../api/ticker'
 import { TableRow } from '../TableRow'
 import { observer } from 'mobx-react-lite'
@@ -13,7 +13,7 @@ interface ITableProps {
   names: string[]
   isLoading: boolean
   label?: string
-  id?: number
+  id?: number | string
 }
 
 export const Table = observer((props: ITableProps) => {
@@ -25,40 +25,32 @@ export const Table = observer((props: ITableProps) => {
     bestBidPrice: item.bestBidPrice,
   }))
 
-  const [modalActive, setModalActive] = useState(false)
-  const [selectedTicker, setSelectedTicker] = useState<ITickerData | null>(null)
+  const hasData = filteredData.length > 0
 
   return (
     <div>
       <Notification notificationText={props.error} />
-      {!filteredData.length && props.isLoading ? (
+      {!hasData && props.isLoading ? (
         <Loader />
       ) : (
         <table className={styles.table}>
-          <thead>
-            <tr>
-              {props.names.map((itemName) => (
-                <th key={itemName}>{itemName}</th>
-              ))}
-            </tr>
-          </thead>
+          {hasData && (
+            <thead>
+              <tr>
+                {props.names.map((itemName) => (
+                  <th key={itemName}>{itemName}</th>
+                ))}
+              </tr>
+            </thead>
+          )}
           <tbody>
             {filteredData.map((item, index) => (
-              <TableRow
-                key={index}
-                item={item}
-                setModalActive={setModalActive}
-                setSelectedTicker={setSelectedTicker}
-              />
+              <TableRow key={index} item={item} />
             ))}
           </tbody>
         </table>
       )}
-      <Modal
-        modalActive={modalActive}
-        setActive={setModalActive}
-        selectedTicker={selectedTicker}
-      />
+      <Modal />
     </div>
   )
 })

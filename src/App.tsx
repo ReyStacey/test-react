@@ -1,28 +1,18 @@
 import React from 'react'
-// import { QuotesOne, QuotesTwo } from './pages/Quotes'
 import { Quotes } from './pages/Quotes'
 import { Home } from './pages/Home'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import { NotFound } from './pages/NotFound'
+import { Layout } from './components/Layout'
 
 function App() {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/quotes">Quotes</Link>
-          </li>
-        </ul>
-      </nav>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/quotes" element={<Quotes />}>
-          {/* <Route index element={<QuotesOne />}></Route>
-          <Route path="/one" element={<QuotesOne />}></Route>
-          <Route path="/two" element={<QuotesTwo />}></Route> */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />}></Route>
+          <Route path="quotes/:id" element={<Quotes />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Route>
       </Routes>
     </>

@@ -8,7 +8,6 @@ class Tickers {
   isLoading: boolean = false
   error: string | null = null
   activeTab: number = 0
-  modalIsOpen: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -22,11 +21,10 @@ class Tickers {
       runInAction(() => {
         this.tickersData = res.data
         const half = Math.ceil(res.data.length / 2)
-        if (!this.modalIsOpen) {
-          this.activeTab === 0
-            ? (this.tickersDataOne = this.tickersData.slice(0, half))
-            : (this.tickersDataTwo = this.tickersData.slice(half))
-        }
+
+        this.activeTab === 0
+          ? (this.tickersDataOne = this.tickersData.slice(0, half))
+          : (this.tickersDataTwo = this.tickersData.slice(half))
 
         this.error = null
         this.isLoading = false
@@ -43,10 +41,6 @@ class Tickers {
 
   setActiveTab = (tabIndex: number) => {
     this.activeTab = tabIndex
-  }
-
-  setModalIsOpen = (value: boolean) => {
-    this.modalIsOpen = value
   }
 }
 

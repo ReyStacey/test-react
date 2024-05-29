@@ -1,35 +1,28 @@
-import React, { useEffect } from 'react'
-import { ITickerData } from '../../api/ticker'
+import React from 'react'
 import styles from './Modal.module.scss'
-import { tickersStore } from '../../store/tickers'
+import { modalStore } from '../../store/modals'
+import { observer } from 'mobx-react-lite'
 
-interface IModalProps {
-  modalActive: boolean
-  setActive: (modalActive: boolean) => void
-  selectedTicker?: ITickerData | null
-}
+export const Modal = observer(() => {
+  const { setModalState, isOpen, data } = modalStore
 
-export const Modal = (props: IModalProps) => {
-  const { modalActive, setActive, selectedTicker } = props
-  const { setModalIsOpen } = tickersStore
-
-  useEffect(() => {
-    setModalIsOpen(modalActive)
-  }, [setModalIsOpen, modalActive])
+  const closeModal = () => {
+    setModalState(false)
+  }
 
   return (
-    <div className={modalActive ? styles.active : styles.modal}>
+    <div className={isOpen ? styles.active : styles.modal}>
       <div className={styles.content}>
-        <div className={styles.close} onClick={() => setActive(false)}>
+        <div className={styles.close} onClick={closeModal}>
           &#x2717;
         </div>
 
-        <h2>{selectedTicker?.symbol} Information</h2>
-        <p>price: {selectedTicker?.price}</p>
-        <p>bestAskSize: {selectedTicker?.bestAskSize}</p>
-        <p>bestAskPrice: {selectedTicker?.bestAskPrice}</p>
-        <p>bestBidPrice: {selectedTicker?.bestBidPrice}</p>
+        <h2>{data.symbol} Information</h2>
+        <p>price: {data.price}</p>
+        <p>bestAskSize: {data.bestAskSize}</p>
+        <p>bestAskPrice: {data.bestAskPrice}</p>
+        <p>bestBidPrice: {data.bestBidPrice}</p>
       </div>
     </div>
   )
-}
+})

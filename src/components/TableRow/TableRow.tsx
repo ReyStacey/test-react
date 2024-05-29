@@ -1,15 +1,15 @@
 import React from 'react'
 import { ITickerData } from '../../api/ticker'
 import { observer } from 'mobx-react-lite'
+import { modalStore } from '../../store/modals'
 
 interface ITicket {
   item: ITickerData
-  setModalActive: (value: boolean) => void
-  setSelectedTicker: (item: ITickerData) => void
 }
 
 export const TableRow = observer((props: ITicket) => {
-  const { item, setModalActive, setSelectedTicker } = props
+  const { item } = props
+  const { setModalState, setModalData } = modalStore
 
   const cells = [
     item.symbol,
@@ -20,8 +20,8 @@ export const TableRow = observer((props: ITicket) => {
   ]
 
   const handleClick = () => {
-    setSelectedTicker(item)
-    setModalActive(true)
+    setModalState(true)
+    setModalData(item)
   }
 
   return (
