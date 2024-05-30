@@ -6,6 +6,7 @@ import { modalStore } from '../../store/modals'
 import { useParams } from 'react-router-dom'
 import { NotFound } from '../NotFound/index.async'
 import { Loader } from '../../components/Loader'
+import { Notification } from '../../components/Notification'
 
 const COLUMN_NAMES: string[] = [
   'symbol',
@@ -29,6 +30,7 @@ const Quotes = observer(() => {
   } = tickersStore
 
   useEffect(() => {
+    setActiveTab(validId)
     getTickets()
 
     if (!isOpen) {
@@ -38,11 +40,7 @@ const Quotes = observer(() => {
 
       return () => clearInterval(interval)
     }
-  }, [isOpen])
-
-  useEffect(() => {
-    setActiveTab(validId)
-  }, [validId])
+  }, [isOpen, validId])
 
   if (!(validId in allTickers)) {
     return <NotFound />
@@ -50,14 +48,13 @@ const Quotes = observer(() => {
 
   return (
     <>
+      {error && <Notification notificationText={error} />}
       {!allTickers[validId].length && isLoading ? (
         <Loader />
       ) : (
         <Table
           data={allTickers[validId]}
-          error={error}
           names={COLUMN_NAMES}
-          isLoading={isLoading}
           label={`Quotes ${validId === 0 ? 'A' : 'B'}`}
           id={validId}
         />
