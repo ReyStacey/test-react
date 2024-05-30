@@ -1,4 +1,3 @@
-import React from 'react'
 import { TableRow } from '../TableRow'
 import { observer } from 'mobx-react-lite'
 import { ITickerData } from '../../api/ticker'

@@ -1,16 +1,22 @@
 import { Suspense } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
-import styles from './Layout.module.scss'
+import { Outlet } from 'react-router-dom'
 import { Loader } from '../Loader'
+import { Header } from '../Header'
+import { NavLink } from 'react-router-dom'
+import { LINKS } from '../../config/routes'
+
+import styles from './Layout.module.scss'
 
 export const Layout = () => {
   return (
     <>
-      <header>
-        <NavLink to="/"> Home </NavLink>
-        <NavLink to="/quotes/0"> Quotes A </NavLink>
-        <NavLink to="/quotes/1"> Quotes B </NavLink>
-      </header>
+      <Header>
+        {LINKS.map((link, index) => (
+          <NavLink to={link.to} key={index}>
+            {link.name}
+          </NavLink>
+        ))}
+      </Header>
       <Suspense fallback={<Loader />}>
         <main className={styles.container}>
           <Outlet />

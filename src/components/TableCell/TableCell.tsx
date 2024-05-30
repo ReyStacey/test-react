@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
+
 import styles from './TableCell.module.scss'
 
 interface ITicketItem {

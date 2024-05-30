@@ -1,12 +1,13 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { ITickerData } from '../../api/ticker'
 import { observer } from 'mobx-react-lite'
 import { Modal } from '../Modal'
-import styles from './Table.module.scss'
 import { Notification } from '../Notification'
 import { Loader } from '../Loader'
 import { TableBody } from '../TableBody'
 import { TableHead } from '../TableHead'
+
+import styles from './Table.module.scss'
 
 interface ITableProps {
   data: ITickerData[]

@@ -1,17 +1,19 @@
-import React from 'react'
-import { Quotes } from './pages/Quotes'
-import { Home } from './pages/Home'
 import { Route, Routes } from 'react-router-dom'
-import { NotFound } from './pages/NotFound'
 import { Layout } from './components/Layout'
+import { ROUTES } from './config/routes'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />}></Route>
-        <Route path="quotes/:id" element={<Quotes />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        {ROUTES.map((route, index) => (
+          <Route
+            path={route.path}
+            element={route.element}
+            index={route.index}
+            key={index}
+          />
+        ))}
       </Route>
     </Routes>
   )

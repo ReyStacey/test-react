@@ -1,7 +1,7 @@
-import React from 'react'
-import styles from './Modal.module.scss'
 import { modalStore } from '../../store/modals'
 import { observer } from 'mobx-react-lite'
+
+import styles from './Modal.module.scss'
 
 export const Modal = observer(() => {
   const { setModalState, isOpen, data } = modalStore

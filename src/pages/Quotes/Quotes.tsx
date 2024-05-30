@@ -4,10 +4,10 @@ import { observer } from 'mobx-react-lite'
 import { Table } from '../../components/Table'
 import { modalStore } from '../../store/modals'
 import { useParams } from 'react-router-dom'
-import { NotFound } from '../NotFound'
+import { NotFound } from '../NotFound/index.async'
 import { Loader } from '../../components/Loader'
 
-const COLUMN_NAMES = [
+const COLUMN_NAMES: string[] = [
   'symbol',
   'price',
   'bestAskSize',
