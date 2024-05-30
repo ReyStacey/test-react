@@ -6,10 +6,10 @@ interface ITableBody {
   data: ITickerData[]
 }
 
-export const TableBody = observer(({ data }: ITableBody) => {
+export const TableBody = observer((props: ITableBody) => {
   return (
     <tbody>
-      {data.map((item) => (
+      {props.data.map((item) => (
         <TableRow key={item.symbol} item={item} name={item.symbol} />
       ))}
     </tbody>

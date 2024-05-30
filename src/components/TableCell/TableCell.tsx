@@ -7,7 +7,8 @@ interface ITicketItem {
   item: string | number
 }
 
-export const TableCell = observer(({ item }: ITicketItem) => {
+export const TableCell = observer((props: ITicketItem) => {
+  const { item } = props
   const [prevItem, setPrevItem] = useState<string | number>(item)
   const [className, setClassName] = useState<string>()
 

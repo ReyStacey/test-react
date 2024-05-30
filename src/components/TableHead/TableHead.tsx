@@ -2,11 +2,11 @@ interface ITableHead {
   names: string[]
 }
 
-export const TableHead = ({ names }: ITableHead) => {
+export const TableHead = (props: ITableHead) => {
   return (
     <thead>
       <tr>
-        {names.map((itemName) => (
+        {props.names.map((itemName) => (
           <th key={itemName}>{itemName}</th>
         ))}
       </tr>

@@ -5,5 +5,9 @@ interface IChildren {
 }
 
 export const Header = ({ children }: IChildren) => {
-  return <header>{children}</header>
+  return (
+    <>
+      <header>{children}</header>
+    </>
+  )
 }

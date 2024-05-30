@@ -4,10 +4,10 @@ interface INotification {
   notificationText: string | null
 }
 
-export const Notification = ({ notificationText }: INotification) => {
+export const Notification = (props: INotification) => {
   return (
-    <div className={notificationText ? styles.notification : ''}>
-      <p>{notificationText}</p>
+    <div className={props.notificationText ? styles.notification : ''}>
+      <p>{props.notificationText}</p>
     </div>
   )
 }
